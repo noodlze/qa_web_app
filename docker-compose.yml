@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  metadb:
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=qa
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
