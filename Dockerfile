@@ -1,12 +1,14 @@
 FROM python:alpine3.7
 
-COPY requirements.txt .
+WORKDIR /app
+
+COPY . .
 
 RUN \
- apk add --no-cache postgresql-libs && \
- apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
- python -m pip install -r requirements.txt && \
- apk --purge del .build-deps
+  apk add --no-cache postgresql-libs && \
+  apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+  python -m pip install -r requirements.txt && \
+  apk --purge del .build-deps && \
+  chmod +x entrypoint.sh
 
-
-CMD ["python", "/app/manage.py" ,"runserver", "--threaded"]
+ENTRYPOINT ["/app/entrypoint.sh"]

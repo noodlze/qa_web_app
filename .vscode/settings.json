@@ -4,7 +4,7 @@
 
   // Editor - Format
   "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
 
   // Editor - Indentation
   "editor.detectIndentation": true,
@@ -60,7 +60,7 @@
 
   // Docker
   "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
 
   // YAML
@@ -88,10 +88,9 @@
   // Prettier
 
   // Python
-  "python.autoComplete.extraPaths": ["/Users/user/miniconda3/envs/py37/lib"],
-  "python.venvPath": "/Users/user/miniconda3/envs/py37",
+  "python.autoComplete.extraPaths": ["${workspaceFolder}/venv/lib"],
+  "python.venvPath": "${workspaceFolder}/venv/py37",
   "python.linting.enabled": true,
-  "python.jediEnabled": false,
   "python.linting.pycodestyleEnabled": false,
   "python.linting.pylintEnabled": true,
   "python.linting.pycodestyleArgs": [
@@ -103,8 +102,7 @@
   ],
   "python.languageServer": "Pylance",
   "python.analysis.extraPaths": [
-    "/Users/thuypham/Desktop/virtual-file-system/venv/lib",
-    "/Users/thuypham/Desktop/virtual-file-system",
-    "/Users/thuypham/Desktop/virtual-file-system/blueprints"
+    "${workspaceFolder}/venv/lib",
+    "${workspaceFolder}"
   ]
 }
