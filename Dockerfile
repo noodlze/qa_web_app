@@ -11,4 +11,4 @@ RUN \
   apk --purge del .build-deps && \
   chmod +x entrypoint.sh
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]

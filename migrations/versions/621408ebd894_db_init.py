@@ -25,9 +25,9 @@ def upgrade():
                                sa.Column('content', sa.Text(),
                                          nullable=False),
                                sa.Column('likes',
-                                         sa.Integer(), nullable=False, server_default=0),
+                                         sa.Integer(), nullable=False, server_default="0"),
                                sa.Column('dislikes', sa.Integer(),
-                                         nullable=False, server_default=0),
+                                         nullable=False, server_default="0"),
                                sa.PrimaryKeyConstraint('id'),
                                )
 
@@ -39,9 +39,9 @@ def upgrade():
                                    sa.Column('content', sa.Text(),
                                              nullable=False),
                                    sa.Column('likes',
-                                             sa.Integer(), nullable=False, server_default=0),
+                                             sa.Integer(), nullable=False, server_default="0"),
                                    sa.Column('dislikes', sa.Integer(),
-                                             nullable=False, server_default=0),
+                                             nullable=False, server_default="0"),
                                    sa.PrimaryKeyConstraint(
                                        'id'),
                                    sa.ForeignKeyConstraint(
@@ -58,7 +58,7 @@ def upgrade():
                                 sa.PrimaryKeyConstraint(
                                     'id', 'tag', name='tag_pk'),
                                 sa.ForeignKeyConstraint(
-                                    ['tag'], ['question.id'],
+                                    ['id'], ['question.id'],
                                     onupdate="CASCADE",
                                     ondelete="CASCADE"),
                                 )
