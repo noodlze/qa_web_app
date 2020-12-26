@@ -1,8 +1,7 @@
 from flask_restful import Resource, abort
-from models import Answer, Question, with_row_locks
+from models import Answer, with_row_locks
 from utils.db_session import provide_db_session
 from flask import request, jsonify
-from datetime import datetime
 
 
 class OneAnswerResource(Resource):
@@ -11,6 +10,7 @@ class OneAnswerResource(Resource):
         answer = Answer.get(ans_id)
         if not answer:
             abort(400)
+
         return {"msg": {"created_at": answer.created_at,
                         "content": answer.content,
                         "likes": answer.likes,
@@ -36,12 +36,14 @@ class OneAnswerResource(Resource):
             existing_answer.dislikes = new_dislikes
 
         db.session.add(existing_answer)
+        db.session.commit()
 
         return {"msg": "Updated answer={}".format(ans_id)}, 200
 
-    def delete(self, qn_id, ans_id):  # delete an answer
+    @provide_db_session
+    def delete(self, qn_id, ans_id,db=None):  # delete an answer
         Answer.delete(ans_id)
-
+        db.session.commit()
         return {"msg": "Delete answer={}".format(ans_id)}, 200
 
 
@@ -75,6 +77,7 @@ class OneQuestionAnswersResource(Resource):
         new_answer = Answer(qn_id, content)
 
         db.session.add(new_answer)
+        db.session.commit()
 
         return {"msg": "Added answer={} to qn={}".format(content, qn_id)}, 200
 
@@ -83,4 +86,5 @@ class OneQuestionAnswersResource(Resource):
         with_row_locks(db.session.query(Answer).filter(
             Answer.qn_id == qn_id)).delete()
 
+        db.session.commit()
         return {"msg": "Deleted all answers of qn={}".format(qn_id)}, 200
