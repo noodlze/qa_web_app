@@ -1,12 +1,12 @@
 from flask_restful import Resource
 
 
-class QuestionListResource(Resource):
+class QuestionsResource(Resource):
     def get(self):
         pass
 
 
-class QuestionResource(Resource):
+class OneQuestionResource(Resource):
     def get(self):
         pass
 

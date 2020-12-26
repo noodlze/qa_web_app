@@ -1,4 +1,13 @@
 from sqlalchemy.ext.declarative import declarative_base
+from .answer import Answer
+from .question import Question
+from .tag import Tag
+
+__all__ = [
+    'Answer',
+    'Question',
+    'Tag'
+]
 
 Base = declarative_base()
 

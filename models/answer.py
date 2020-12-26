@@ -7,6 +7,7 @@ from sqlalchemy import (
     DateTime,
 )
 from datetime import datetime
+from utils.db_session import provide_db_session
 
 
 class Answer(Base):
@@ -25,3 +26,24 @@ class Answer(Base):
         self.created_at = created_at
         self.likes = likes
         self.dislikes = dislikes
+
+    def __repr__(self):
+        return '<Answer qn_id={} content={} created_at={} likes={} dislikes={}>'.format(self.qn_id,
+                                                                            self.content,
+                                                                            self.created_at,
+                                                                            self.likes,
+                                                                            self.dislikes)
+
+    @staticmethod
+    @provide_db_session
+    def get(id,db=None):
+        answer = with_row_locks(db.session.query(Answer).filter(
+            Answer.id == id, of=Answer)).first()
+        return answer
+
+
+    @staticmethod
+    @provide_db_session
+    def delete(id,db=None):
+        with_row_locks(db.session.query(Answer).filter(
+            Answer.id == id), of=Answer).delete()

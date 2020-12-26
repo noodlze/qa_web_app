@@ -1,9 +1,9 @@
 from .answer import (
-    AnswerResource,
-    AnswerListResource
+    OneAnswerResource,
+    OneQuestionAnswersResource
 )
 
 from .question import (
-    QuestionResource,
-    QuestionListResource
+    OneQuestionResource,
+    QuestionsResource
 )
