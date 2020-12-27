@@ -1,5 +1,6 @@
 from flask_restful import Resource, abort
-from models import Answer, with_row_locks
+from models.answer import Answer
+from models import  with_row_locks
 from utils.db_session import provide_db_session
 from flask import request, jsonify
 

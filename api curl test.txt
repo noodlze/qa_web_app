@@ -1,0 +1,4 @@
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"content":"what is a name?"}' \
+  http://localhost:5000/api/v1/questions
